@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gaia.Helpers\Gaia.Helpers.csproj" />
-    <ProjectReference Include="..\Gaia.ToDoList.Bisiness\Gaia.ToDoList.Business.csproj" />
+    <ProjectReference Include="..\Gaia.ToDoList.Business\Gaia.ToDoList.Business.csproj" />
   </ItemGroup>
 
 </Project>

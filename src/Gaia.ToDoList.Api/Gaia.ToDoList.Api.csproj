@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gaia.Authentication.Jwt\Gaia.Authentication.Jwt.csproj" />
-    <ProjectReference Include="..\Gaia.ToDoList.Bisiness\Gaia.ToDoList.Business.csproj" />
+    <ProjectReference Include="..\Gaia.ToDoList.Business\Gaia.ToDoList.Business.csproj" />
     <ProjectReference Include="..\Gaia.ToDoList.Data\Gaia.ToDoList.Data.csproj" />
   </ItemGroup>
 

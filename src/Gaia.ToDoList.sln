@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{12352413-ED3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaia.ToDoList.Api", "Gaia.ToDoList.Api\Gaia.ToDoList.Api.csproj", "{9D282587-F2EB-4427-B784-7E0CF48B459F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaia.ToDoList.Business", "Gaia.ToDoList.Bisiness\Gaia.ToDoList.Business.csproj", "{378A56D5-9D48-4C7E-8F45-0E691124F171}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaia.ToDoList.Business", "Gaia.ToDoList.Business\Gaia.ToDoList.Business.csproj", "{378A56D5-9D48-4C7E-8F45-0E691124F171}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaia.ToDoList.Data", "Gaia.ToDoList.Data\Gaia.ToDoList.Data.csproj", "{42861974-55CC-4141-AD47-7652FF6511FE}"
 EndProject
