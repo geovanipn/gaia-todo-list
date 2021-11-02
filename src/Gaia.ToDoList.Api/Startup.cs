@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using Gaia.ToDoList.Api.Configuration;
 using Gaia.ToDoList.Api.Configuration.DependencyInjection;
@@ -38,8 +39,13 @@ namespace Gaia.ToDoList.Api
         {
             services.AddDbContext<TodoListDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                //options.UseInMemoryDatabase("localDb");
+                var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+                if (connectionString == null)
+                {
+                    throw new ArgumentException("Empty database string connection");
+                }
+                
+                options.UseSqlServer(connectionString);
             });
 
 
@@ -60,6 +66,11 @@ namespace Gaia.ToDoList.Api
             app.UseApiConfig(env);
 
             app.UseSwaggerConfig(provider);
+
+            //Apply migrations
+            using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
+            var context = serviceScope.ServiceProvider.GetRequiredService<TodoListDbContext>();
+            context.Database.Migrate();
         }
     }
 }

@@ -20,20 +20,15 @@ namespace Gaia.Helpers.Security
             {
                 Mode = CipherMode.CBC
             };
-            using (var encryptor = symmetricKey.CreateEncryptor(keyBytes, initVectorBytes))
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
-                    {
-                        cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
-                        cryptoStream.FlushFinalBlock();
-                        var cipherTextBytes = memoryStream.ToArray();
-                        return Convert.ToBase64String(cipherTextBytes);
-                    }
-
-                }
-            }
+            using var encryptor = symmetricKey.CreateEncryptor(keyBytes, initVectorBytes);
+            using var memoryStream = new MemoryStream();
+            using var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write);
+            
+            cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
+            cryptoStream.FlushFinalBlock();
+            var cipherTextBytes = memoryStream.ToArray();
+            
+            return Convert.ToBase64String(cipherTextBytes);
         }
 
         public static string Decrypt(in string cipherText, in string passPhrase)
@@ -47,18 +42,15 @@ namespace Gaia.Helpers.Security
             {
                 Mode = CipherMode.CBC
             };
-            using (var decryptor = symmetricKey.CreateDecryptor(keyBytes, initVectorBytes))
-            {
-                using (var memoryStream = new MemoryStream(cipherTextBytes))
-                {
-                    using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
-                    {
-                        var plainTextBytes = new byte[cipherTextBytes.Length];
-                        var decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
-                        return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
-                    }
-                }
-            }
+            
+            using var descriptor = symmetricKey.CreateDecryptor(keyBytes, initVectorBytes);
+            using var memoryStream = new MemoryStream(cipherTextBytes);
+            using var cryptoStream = new CryptoStream(memoryStream, descriptor, CryptoStreamMode.Read);
+            
+            var plainTextBytes = new byte[cipherTextBytes.Length];
+            var decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
+            
+            return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
         }
     }
 }

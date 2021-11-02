@@ -1,0 +1,21 @@
+﻿services:
+  db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=S4_p4ssw0rd!
+    ports:
+      - "1433:1433"
+
+  todo-list-api:
+    image: gaia-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DB_CONNECTION_STRING=Server=db;Database=ToDoList;User=sa;Password=S4_p4ssw0rd!
+    build:
+      context: .
+      dockerfile: Gaia.ToDoList.Api/Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - db

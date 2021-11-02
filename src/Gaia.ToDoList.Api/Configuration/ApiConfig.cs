@@ -65,13 +65,12 @@ namespace Gaia.ToDoList.Api.Configuration
             }
             else
             {
-                app.UseCors("Development"); // config expected: Production
+                app.UseCors("Production");
                 app.UseHsts();
+                app.UseHttpsRedirection();
             }
 
             app.UseMiddleware<ExceptionMiddleware>();
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 

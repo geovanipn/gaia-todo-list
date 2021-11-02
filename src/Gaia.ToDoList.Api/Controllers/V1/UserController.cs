@@ -51,7 +51,7 @@ namespace Gaia.ToDoList.Api.Controllers.V1
                 return BadRequest(ModelState);
             }
 
-            EncryptPassword(userInputModel);
+            userInputModel.Password = EncryptPassword(userInputModel.Password);
             
             var user = await _userService.Create(_mapper.Map<User>(userInputModel));
 
@@ -66,16 +66,16 @@ namespace Gaia.ToDoList.Api.Controllers.V1
                 return BadRequest(ModelState);
             }
             
-            EncryptPassword(userInputModel);
+            userInputModel.Password = EncryptPassword(userInputModel.Password);
             
             var user = await _userService.Update(_mapper.Map<User>(new UpdateUserInputModel(id, userInputModel)));
 
             return Response(_mapper.Map<UserOutputModel>(user));
         }
 
-        private static void EncryptPassword(UserInputModel userInputModel)
+        private static string EncryptPassword(string password)
         {
-            userInputModel.Password = Encryption.Encrypt(userInputModel.Password,
+            return Encryption.Encrypt(password,
                 AppSettingsHelper.GetValue<string>("Encryption:PassPhrase"));
         }
     }

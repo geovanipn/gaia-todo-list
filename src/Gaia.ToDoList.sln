@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{12352413-ED32-40E8-B755-6C4D0FCED814}"
+ProjectSection(SolutionItems) = preProject
+	docker-compose.yml = docker-compose.yml
+EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaia.ToDoList.Api", "Gaia.ToDoList.Api\Gaia.ToDoList.Api.csproj", "{9D282587-F2EB-4427-B784-7E0CF48B459F}"
 EndProject
